@@ -1,0 +1,504 @@
+
+
+User
+
+username
+first_name
+last_name
+middle_name
+full_name
+type
+subtype
+dob
+age
+gender
+password
+system_id
+notes
+role
+create_time
+update_time
+created_by
+updated_by
+
+
+Contact
+
+entity_type
+    user
+    production_company
+    venue
+    event
+    show
+entity_id
+primary
+phone
+phone2
+email
+address
+address2
+state
+city
+country
+postal_code
+create_time
+update_time
+created_by
+updated_by
+
+
+UserPermission
+
+user_id
+type
+name
+    can add show
+    can add review
+    can add rating
+    can edit show
+    can edit review
+    can add users
+    can edit users
+create_time
+update_time
+created_by
+updated_by
+
+
+ShowUser
+
+show/production_id
+user_id
+attendance type
+    venue 
+    show/production
+    cast
+    crew
+    reviewer
+    attendee
+create_time
+update_time
+created_by
+updated_by
+
+
+VenueUser
+
+user_id
+venue_id
+user_venue_role
+create_time
+update_time
+created_by
+updated_by
+
+
+ProductionCompany
+
+name
+description
+founded
+type
+create_time
+update_time
+created_by
+updated_by
+
+
+Show
+
+title
+description
+production_company_id
+age_recommendation
+duration
+start_date
+end_date
+type
+    theatre
+    dance
+    performance art
+    music
+create_time
+update_time
+created_by
+updated_by
+
+
+VenueShow
+
+show_id
+venue_id
+type
+date
+start_time
+end_time
+active
+create_time
+update_time
+created_by
+updated_by
+
+
+Venue
+
+name
+description
+type
+accessibility
+create_time
+update_time
+created_by
+updated_by
+
+
+Event
+
+name
+description
+type
+start_date
+end_date
+create_time
+update_time
+created_by
+updated_by
+
+
+VenueEvent
+
+venue_id
+event_id
+show_id
+active
+create_time
+update_time
+created_by
+updated_by
+
+
+Review
+
+user_id
+show_id
+venue_id
+event_id
+type
+    audience
+    critic
+review
+create_time
+update_time
+created_by
+updated_by
+
+
+Rating
+
+user_id
+show_id
+venue_id
+event_id
+review_id
+type
+value
+create_time
+update_time
+created_by
+updated_by
+
+
+Tag
+
+entity_type
+    user
+    show
+    venue
+    production_company
+    production_company_user
+    event
+    review
+    watchlist
+entity_id
+tag
+create_time
+update_time
+created_by
+updated_by
+
+
+Watchlist
+
+user_id
+name
+description
+create_time
+update_time
+created_by
+updated_by
+
+
+WatchlistItem
+
+wahtchlist_id
+show_id
+position
+create_time
+update_time
+created_by
+updated_by
+
+
+Like
+
+user_id
+entity_type
+    user
+    show
+    venue
+    production_company
+    production_company_user
+    event
+    review
+    watchlist
+entity_id
+tag
+value
+create_time
+update_time
+created_by
+updated_by
+
+
+
+---------------
+Relationships
+---------------
+
+A user can have many contacts through contact.entity_id
+
+A Contact can belong to one user through contact.entity_id
+
+A production_company can have many contacts through contact.entity_id
+
+A Contact can belong to one production_company through contact.entity_id
+
+A venue can have many contacts through contact.entity_id
+
+A Contact can belong to one venue through contact.entity_id
+
+An event can have many contacts through contact.entity_id
+
+A Contact can belong to one event through contact.entity_id
+
+A show can have many contacts through contact.entity_id
+
+A Contact can belong to one show through contact.entity_id
+
+
+
+A user can have many user_permissions through user_permission.user_id
+
+A user_permission can belong to one user through user_permission.user_id
+
+
+
+A user can have many show_users through show_user.user_id
+
+A show can have many show_users through show_user.show_id
+
+A show_user can belong to one user through show_user.user_id
+
+A show_user can belong to one show through show_user.show_id
+
+
+
+A user can have many venue_users through venue_user.user_id
+
+A venue can have many venue_users trough venue_user.venue_id
+
+A venue user can belong to one user through venue_user.user_id
+
+A venue_user can belong to one venue through venue_user.venue_id
+
+
+
+A production_company can have many shows through show.production_company_id
+
+A show can belong to one production_company through show.production_company_id
+
+
+
+A venue can have many venue_shows through venue_show.venue_id
+
+A venue_show can belong to one venue through venue_show.venue_id
+
+A show can have many venue shows through venue_show.show_id
+
+A venue show can belong to one show through venue_show.show_id
+
+
+
+A venue can have many venue_events through venue_event.venue_id
+
+A venue_event can belong to one venue through venue_event.venue_id
+
+An event can have many vanue_events through venue_event.event_id
+
+A venue event can belong to one venue through venue_event.venue_id
+
+
+
+A user can have many reviews through review.user_id
+
+A review can belong to one user through review.user_id
+
+A show can have many reviews through review.show_id
+
+A review can belong to one show through review.show_id
+
+A venue can have many reviews through review.venue_id
+
+A review can belong to one venue through review.venue_id
+
+An event can have many reviews through review.event_id
+
+A review can belong to one event through review.event_id
+
+
+
+A user can have many rating through rating.user_id
+
+A rating can belong to one user through rating.user_id
+
+An event can have many ratings through rating.event_id
+
+A rating can belong to one event through rating.event_id
+
+A venue can have many ratings through rating.venue_id
+
+A rating can belong to one venue through rating.venue_id
+
+A show can have many ratings through rating.show_id
+
+A rating can belong to one show through rating.show_id
+
+A review can have one rating through rating.review_id
+
+A rating can belong to one review through rating.review_id
+
+
+
+A user can have many tags through tag.entity_id
+
+A tag can belong to one user through tag.entity_id
+
+An event can have many tags though tag.entity_id
+
+A tag can belong to one event through tag.entity_id
+
+A venue can have many tags through tag.entity_id
+
+A tag can belong to one venue through tag.entity_id
+
+A show can have many tags through tag.entity_id
+
+A tag can belong to one show through tag.entity_id
+
+A production_company can have many tags through tag.entity_id
+
+A tag can belong to one production_company through tag.entity_id
+
+A production_company_user can have many tags through tag.entity_id
+
+A tag can belong to one production_company_user through tag.entity_id
+
+A review can have many tags through tag.entity_id
+
+A tag can belong to one review through tag.entity_id
+
+------------------
+NEW Relationships
+
+A user can have many watchlists through watchlist.user_id
+
+A watchlist can belong to one user through watchlist.user_id
+
+A watchlist can have many watchlist_items through watchlist_item.watchlist_id
+
+A watchlist item can belong to one watchlist through watchlist_item.watchlist_id
+
+A watchlist item can have one show through watchlist_item.show_id
+
+A show can belong to many watchlist_items through watchlist_item.show_id
+
+A watchlist can have many tags through tag.entity_id
+
+A tag can belong to one watchlist through tag.entity_id
+
+
+
+A user can have many likes through like.entity_id
+
+A like can belong to one user through like.entity_id
+
+A show can have many likes through like.entity_id
+
+A like can belong to one show through like.entity_id
+
+A venue can have many likes through like.entity_id
+
+A like can belong to one venue through like.entity_id
+
+A event can have many likes through like.entity_id
+
+A like can belong to one event through like.entity_id
+
+A production_company can have many likes through like.entity_id
+
+A like can belong to one production_company through like.entity_id
+
+A production_company_user can have many likes through like.entity_id
+
+A like can belong to one production_company_user through like.entity_id
+
+A review can have many likes through like.entity_id
+
+A like can belong to one review through like.entity_id
+
+A watchlist can have many likes through like.entity_id
+
+A like can belong to one watchlist through like.entity_id
+
+
+-----------
+getAll[model]
+get[model]ByQuery
+
+query.where_like.forEach(whl => {
+        where_like.push({[whl.key]: { [Op.like]: `%${wh.value}%` }});
+      });
+
+      query.where.forEach(wh => {
+        where[wh.key] = wh.value;
+      });
+
+
+
+- add wishlist & production_company_user to tag entity_types
+    -update tag resolver query includes
+
+- add tag + production company user relationships done
+
+- add watchlist, watchlist_item and like relationships 
+
+
+- add production_company_user to tag resolver query includes
+
+- add tag to production_company_user resolver query includes 
+
+- add likes to resolver query includes of all relevant entity types
+
+- add watchlist item and watchlist (nested) inlcudes to show resolver query
+
+- add watchlist and watchlist_item (nested) includes to user resolver query
